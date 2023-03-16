@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'master'
+      - 'dev'
     paths:
       - 'htdocs/**'
       - 'root/**'
@@ -12,7 +13,8 @@ on:
 
   pull_request:
     branch:
-      - 'js'
+      - 'master'
+      - 'dev'
     types:
       - opened
       - synchronize
@@ -43,7 +45,6 @@ jobs:
           fakeroot bash build-ipk.sh
           echo "ASSET_NAME=$(ls *.ipk)" >> $GITHUB_ENV
           popd
-
       - name: Publishing to GitHub Artifacts
         uses: actions/upload-artifact@v3
         if: github.event_name != 'release'
